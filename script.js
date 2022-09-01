@@ -24,3 +24,29 @@ const counterReducer = (state = initialState, action) => {
     return state;
   }
 };
+
+// create store
+const store = Redux.createStore(counterReducer);
+
+const render = () =>{
+  const state = store.getState();
+  counterEl.innerText = state.value.toString();
+};
+
+// update UI initially
+render();
+
+store.subscribe(render);
+
+// button click listener
+incrementEl.addEventListener("click", ()=>{
+  store.dispatch({
+    type: "increment"
+  });
+});
+
+decrementEl.addEventListener("click", ()=>{
+  store.dispatch({
+    type: "decrement"
+  });
+});
